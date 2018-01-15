@@ -1,0 +1,330 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Anish Bhanwala</title>
+	<style>
+
+	/* Reset margin and padding */
+	h1, nav, body, ul, li, h5, h3 {
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Typography */
+	body {
+		font-family: "Helvetica Neue", san-sarif;
+		background: #888;
+	}
+	h1 {
+		font-size: 36px;
+	}
+
+	/*  column layout  */
+	.container {
+		width: 1024px;
+		margin: 0 auto;
+	}
+	.col-1-2,
+	.col-1-3,
+	.col-2-3 {
+		box-sizing: border-box;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.col-1-2 {
+		width: 50%;
+	}
+	.col-1-3 {
+		width: 33.33%;		
+	}
+	.col-2-3 {
+		width: 66.66%;
+	}
+
+	/* header and navigation */
+	header {	
+		background: #722872;
+		margin: 0;
+		padding: 0;
+		top: 0;
+		left: 0;
+		position: fixed;
+		height: 80px;
+		width: 100%;
+	}
+	.logo {
+		color: #fff;
+		padding-top: 18px;
+	}
+	li {
+		display: inline-block;
+	}
+	nav {
+		margin-top: 32px;
+		text-align: right;
+	}
+	nav a {		
+		margin: 0 10px;	
+		text-transform: uppercase;			
+		color: #777;
+		text-decoration: none;
+	}
+	nav .active {
+		padding: 10px 15px;
+		background: #e7e7e7;
+	}
+
+
+	/* About section */
+	.about {
+		background: #aaa;
+		padding-top: 85px;
+		color: #fff;	
+	}
+	.about .col-1-3, 
+	.about .col-2-3 {
+		padding: 40px;
+	}
+	.about p {
+		font-size: 20px;
+		text-align: right;
+		padding-top: 40px;
+	}
+	.about h4 {
+		font-size: 22px;
+		font-weight: 400;
+		text-align: right;
+	}
+	hr {
+		height: 5px;
+		background: #fff;
+		margin-left: 15%;
+		margin-top: 40px;
+	}
+	.my-img {
+		border-radius: 50%;
+		height: 250px;
+		margin-top: 50px;
+	}
+
+	/* sections */
+	section {
+		background: #eee;
+		padding-top: 20px;
+	}
+	.section-heading {
+		background: #eee;
+		font-size: 32px;
+		color: #888;
+		text-align: center;	
+		text-transform: uppercase;
+		padding: 30px;
+		border-bottom: 5px solid #888;
+		width: 40%;
+		margin: 0 auto 25px auto;
+	}
+
+	/* Portfolio section */	
+	.portfolio {
+		padding-bottom: 30px;
+		border-bottom: 2px solid #ddd;	
+	}
+	.portfolio img {	
+		width: 400px;
+	}
+	.portfolio ul,
+	.portfolio li {
+		margin: 0;
+		padding: 0;		
+	}
+
+	.portfolio li {
+		width: 50%;
+		padding: 10px;
+		text-align: center;
+		box-sizing: border-box;
+	}
+
+	/* Contact us section */
+	.contact p {
+		font-size: 20px;
+		color: #666;
+		padding: 0 70px;
+	}
+	form {
+		padding-left: 70px;
+	}
+	input, textarea {
+		display: block;
+		width: 100%;
+		font-size: 30px;
+		border: none;
+		border-bottom: 1px solid #bbb;		
+		padding: 15px 0;
+		color: #666;
+		background: none;
+		margin-bottom: 20px;
+	}
+	input:focus, textarea:focus {
+		outline: none;
+	}
+	textarea {
+		height: 150px;
+		resize: none;
+	}
+	label {
+		display: none;
+	}
+	.contact {
+		padding-bottom: 100px;
+	}
+	button {
+		font-size: 20px;
+		color: #666;
+		padding: 5px 10px;
+	}
+	small {
+		display: inline-block;
+		font-size: 20px;
+		margin-top: 45px;
+	}
+	strong {
+		display: inline-block;
+		font-size: 19px;
+		margin-top: 160px;	
+		font-weight: 400;
+	}
+
+	/* footer */
+	footer {
+		background: #aaa;
+		color: #fff;
+	}
+	footer li {
+		display: inline-block;
+	}
+	footer h5 {
+		background: #722872;
+		font-size: 20px;
+		font-weight: 400;
+		color: #fff;
+		text-align: center;
+		padding: 30px;
+	}
+	footer section {
+		padding-top: 0;
+		background: #aaa;
+	}
+	footer div {
+		margin: 70px 0;
+		vertical-align: top;
+		display: inline-block;
+		width: 50%;
+		background: #aaa;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	footer h3 {
+		text-transform: uppercase;
+		font-size: 24px;
+		padding-bottom: 30px;
+	}
+	footer p {
+		font-size: 20px;
+		margin: 0;
+	}
+	footer a {
+		color: #722872;
+		text-decoration: none;
+	}
+	footer a:hover {
+		text-decoration: underline;;
+	}
+	</style>
+</head>
+
+<body>
+
+	<header>
+		<div class="container">
+		<h1 class="logo col-1-2">Anish</h1><!-- 
+	--><nav class="col-1-2">
+	<ul>
+		<li><a class="active" href="#about">About</a></li>
+		<li><a href="#portfolio">Portfolio</a></li>
+		<li><a href="#contact">Contact</a></li>
+	</ul>
+</nav>
+</div>
+</header>
+
+<section id="about" class="about container">
+	<div class="col-2-3">
+		<p>
+			Front-End Developer and UX/UI designer, with practical experience in project management, branding strategy, and creative direction; devoted to functional programming and information architecture.
+		</p>
+		<hr>
+		<h4>Web Developer - User Experience Designer - Graphic Artist</h4>
+		</div><!-- 
+	--><div class="col-1-3">
+	<img class="my-img" src="me.JPG" alt="Anish Bhanwala">
+</div>
+</section>
+<section id="portfolio" class="portfolio container">
+	<h2 class="section-heading">Portfolio</h2>
+	<ul>
+			<li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li><!-- 
+			 --><li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li><!-- 
+			 --><li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li><!-- 
+			 --><li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li><!-- 
+			 --><li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li><!-- 
+			--><li><img src="placeholder.gif" class="col-1-2" alt="placeholder"></li>
+		</ul>
+	</section>
+	<section id="contact" class="contact container">
+		<h2 class="section-heading">Contact me</h2>
+		<form class="col-1-2">
+			<label>Name</label>
+			<input type="text" name="name" placeholder="Name">
+			<label>Email</label>
+			<input type="text" name="email" placeholder="Email Address">
+			<label>Phone</label>
+			<input type="text" name="phone" placeholder="Phone">
+			<label>Message</label>
+			<textarea name="message" placeholder="Message"></textarea>
+
+			<button type="button">Send</button>
+		</form><!-- 
+	--><p class="col-1-2">
+	Want to get in touch with me? Be it to request more info about myself or my experience, to ask for my resume, tips on how to solve your sudoku, random questions about the universe and the meaning of life, or even if only for some nice Fika here in stunning Toronto... just feel free to drop me a line anytime.
+
+	<small>I promise to reply A.S.A.P.</small>
+
+		<strong>Note: No spam/soliciting pour moi, merci :)</strong>
+	</p>
+</section>
+
+<footer>
+	<section class="container">
+		<div>
+			<h3>About this page</h3>
+			<p>Made with coffee and music</p>
+			<p> by <a href="#">Anish B</a>.</p>
+		</div><!-- 
+		 --><div>
+			<h3>Around the web</h3>
+			<ul>
+				<li>LinkedIn</li>
+				<li>Github</li>
+				<li>Twitter</li>
+				<li>flicker</li>
+			</ul>	
+		</div>
+	</section>
+	<h5>
+		Anish © 2018. All Rights Reversed
+	</h5>
+</footer>
+
+</body>
+</html>
