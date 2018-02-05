@@ -2,6 +2,7 @@
 
 int isJpegStart(unsigned char bytes[]);
 void writeJPEGToFile(int fileNum, FILE *cardptr);
+char *getFilenameFormat(int fileNum);
 
 const int BLOCK_SIZE = 512;
 
@@ -24,7 +25,7 @@ int main(int argc, char *argv[])
         return 2;
     }
 
-    int fileNum = 1;
+    int fileNum = 0;
     //unsigned char is 1 byte but normal char is not
     unsigned char bytes[4];
 
@@ -57,7 +58,7 @@ int isJpegStart(unsigned char bytes[])
         && ((int)bytes[2]) == 255
         && (((int)bytes[3]) >= 224 && ((int)bytes[3]) <= 239))
     {
-        printf("JPEG FOUND \n");
+        //printf("JPEG FOUND \n");
         return 1;
     }
 
@@ -72,7 +73,7 @@ void writeJPEGToFile(int fileNum, FILE *cardptr)
 
     //Create dynamic file name by appending file number
     char filename[17];
-    sprintf(filename, "photos/%i.jpeg", fileNum);
+    sprintf(filename, getFilenameFormat(fileNum), fileNum);
 
     FILE *outptr = fopen(filename, "w");
     int firstByte = 1;
@@ -91,4 +92,21 @@ void writeJPEGToFile(int fileNum, FILE *cardptr)
     }
 
     fclose(outptr);
+}
+
+//Format filename to always 3 decimal
+char *getFilenameFormat(int fileNum)
+{
+    if (fileNum < 10)
+    {
+        return "00%i.jpg";
+    }
+    else if (fileNum < 99)
+    {
+        return "0%i.jpg";
+    }
+    else
+    {
+        return "%i.jpg";
+    }
 }
