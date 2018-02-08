@@ -16,15 +16,16 @@ void addnode(linkedlist *ll, char *word)
 
     //printf("word: %s, copy: %s\n", word, newnode->word);
 
-    node *lastnode = getlastnode(ll);
-    if (lastnode != NULL)
+    node *first = ll->first;
+    if (first == NULL)
     {
-        //set newnode as last node
-        lastnode->next = newnode;
+        //set newnode as first node
+        ll->first = newnode;
     }
     else
     {
-        //set newnode as first node
+        //set newnode as first node and first node as 2nd node
+        newnode->next = ll->first;
         ll->first = newnode;
     }
 }
