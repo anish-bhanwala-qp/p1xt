@@ -1,0 +1,301 @@
+// Implements a dictionary's functionality
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <ctype.h>
+
+#include "dictionary.h"
+
+void tolowercase(char *word)
+{
+    for(int i = 0; i < strlen(word); i++)
+    {
+        word[i] = tolower(word[i]);
+    }
+}
+
+
+/* ******************* Start Linked list nodes and methods***************** */
+typedef struct linkedlistnode
+{
+    char word[46];
+    struct linkedlistnode *next;
+} node;
+
+
+node * createnode(char *word)
+{
+    node *n = malloc(sizeof(node));
+    n->next = NULL;
+    strcpy(n->word, word);
+
+    return n;
+}
+
+void addnode(node *n, char *word)
+{
+    node *newnode = createnode(word);
+    if (n->next == NULL)
+    {
+        n->next = newnode;
+    }
+    else
+    {
+        //Make new node the first node;
+        newnode->next = n->next;
+        n->next = newnode;
+    }
+}
+
+bool findword(node *n, const char *word)
+{
+      //Make sure word is lower case
+    char copiedword[46];
+    strcpy(copiedword, word);
+    tolowercase(copiedword);
+
+    while (n != NULL)
+    {
+        if (strcmp(copiedword, n->word) == 0)
+        {
+            return true;
+        }
+        n = n->next;
+    }
+
+    return false;
+}
+
+void freememory(node *n)
+{
+    while (n != NULL)
+    {
+        node *prev = n;
+        n = n->next;
+        free(prev);
+    }
+}
+
+/* ******************* END Linked list nodes and methods***************** */\
+
+
+/* ******************* Start map methods***************** */
+node *nodes[26];
+
+void initnodes()
+{
+    for (int i=0; i < 26; i++)
+    {
+        nodes[i] = NULL;
+    }
+}
+
+int gethashcode(const char *word)
+{
+    char c = tolower(word[0]);
+    return (int)c - 97;
+}
+
+void addtomap(char *word)
+{
+    int hashcode = gethashcode(word);
+    if (nodes[hashcode] == NULL)
+    {
+        nodes[hashcode] = createnode(word);
+    }
+    else
+    {
+        addnode(nodes[hashcode], word);
+    }
+
+}
+
+bool findinmap(const char *word)
+{
+    int hashcode = gethashcode(word);
+    return findword(nodes[hashcode], word);
+}
+
+/* ******************* End map methods***************** */
+
+/* ******************* Start Trie methods***************** */
+
+typedef struct _trienode
+{
+    struct _trienode *children[27];
+    char *word;
+} trienode;
+
+trienode *root = NULL;
+int trinode_size = 0;
+
+int getcharindex(char c)
+{
+    char lower_c = tolower(c);
+    int index = (int)lower_c - 97;
+    //Special case for apostrophe
+    if (index == -58)
+    {
+        return 26;
+    }
+
+    return index;
+}
+
+void resetchildrentonull(trienode *node)
+{
+    for (int i = 0; i < 27; i++)
+    {
+        node->children[i] = NULL;
+    }
+}
+
+trienode *create_trienode()
+{
+    trienode *node = malloc(sizeof(trienode));
+    node->word = NULL;
+    resetchildrentonull(node);
+
+    return node;
+}
+
+
+void addwordtotrie(char *word)
+{
+    trienode *next = root;
+    for (int i = 0; word[i] != '\0'; i++)
+    {
+        //convert char to integer where a=0, b=1 so on.
+        int char_index = getcharindex(word[i]);
+        if (char_index < 0)
+        {
+            printf("Invalid char is: %c, %i", word[i], char_index);
+        }
+
+        if (next->children[char_index] == NULL)
+        {
+            //create new trie node
+            next->children[char_index] = create_trienode();
+        }
+
+        next = next->children[char_index];
+    }
+
+    char *copiedword = malloc(46*sizeof(char));
+    strcpy(copiedword, word);
+    tolowercase(copiedword);
+    next->word = copiedword;
+
+    trinode_size++;
+}
+
+bool findwordintrie(const char *word)
+{
+      //Make sure word is lower case
+    char copiedword[46];
+    strcpy(copiedword, word);
+    tolowercase(copiedword);
+
+    trienode *next = root;
+
+    for (int i = 0; word[i] != '\0'; i++)
+    {
+        //convert char to integer where a=0, b=1 so on.
+        int char_index = getcharindex(word[i]);
+        next = next->children[char_index];
+        if (next == NULL)
+        {
+            return false;
+        }
+    }
+
+    if (next->word == NULL)
+    {
+        return false;
+    }
+
+   return strcmp(copiedword, next->word) == 0;
+}
+
+void freememorytrie(trienode *node)
+{
+    for (int i = 0; i < 27; i++)
+    {
+        trienode *next = node->children[i];
+        if (next != NULL)
+        {
+            freememorytrie(next);
+        }
+    }
+    if (node->word != NULL)
+    {
+        free(node->word);
+    }
+
+    if (node != NULL)
+    {
+        free(node);
+    }
+}
+
+/* ******************* End Trie methods***************** */
+
+
+//node *firstnode = NULL;
+
+bool check(const char *word)
+{
+
+    return findwordintrie(word);
+}
+
+// Loads dictionary into memory, returning true if successful else false
+bool load(const char *dictionary)
+{
+    root = create_trienode();
+
+    FILE *fileptr = fopen(dictionary, "r");
+    if (!fileptr)
+    {
+        return false;
+    }
+
+    char c;
+    char word[LENGTH + 1];
+    int i = 0;
+
+    while ((c = getc(fileptr)) != EOF) {
+
+        //Reset index if its's line end
+        if (c == '\n')
+        {
+            //Terminate string
+            word[i++] = '\0';
+            i = 0;
+            //add word to linked list
+            addwordtotrie(word);
+        }
+        else
+        {
+            word[i++] = c;
+        }
+
+    }
+
+    return true;
+}
+
+
+// Returns number of words in dictionary if loaded else 0 if not yet loaded
+unsigned int size(void)
+{
+    return trinode_size;
+}
+
+// Unloads dictionary from memory, returning true if successful else false
+bool unload(void)
+{
+    freememorytrie(root);
+    return true;
+}
