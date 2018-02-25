@@ -1,0 +1,40 @@
+******************* My results linked list ********************
+WORDS MISSPELLED:     955
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        17756
+TIME IN load:         0.04
+TIME IN check:        17.18
+TIME IN size:         0.00
+TIME IN unload:       0.00
+TIME IN TOTAL:        17.22
+
+******************* My results map ********************
+WORDS MISSPELLED:     955
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        17756
+TIME IN load:         0.05
+TIME IN check:        1.00
+TIME IN size:         0.00
+TIME IN unload:       0.00
+TIME IN TOTAL:        1.06
+
+******************* My results trie ********************
+WORDS MISSPELLED:     955
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        17756
+TIME IN load:         0.28
+TIME IN check:        0.03
+TIME IN size:         0.00
+TIME IN unload:       0.10
+TIME IN TOTAL:        0.41
+
+
+******************* CS50 results ********************
+WORDS MISSPELLED:     955
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        17756
+TIME IN load:         0.04
+TIME IN check:        0.05
+TIME IN size:         0.00
+TIME IN unload:       0.01
+TIME IN TOTAL:        0.10
