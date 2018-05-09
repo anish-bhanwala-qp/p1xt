@@ -2,6 +2,24 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/*
+*      MEMORY USAGE
+* Deque object - 16B overhead
+* first - 8B ref
+* last - 8B ref
+* size - 4B int
+* padding - 4B
+* Total -> 16 + 8 + 8 + 4 + 4 = 40B
+*
+* Node Object - 16B overhead + 8B for inner class
+* item - 8B ref
+* next - 8B ref
+* prev - 8B ref
+* Total -> 16 + 8 + 8 + 8 + 8 = 48B
+*
+* Total for n elements = 40 + 48n
+* n = 1024 -> 40 + 1024*48
+* */
 public class Deque<Item> implements Iterable<Item> {
     private Node<Item> first;
     private Node<Item> last;
